@@ -2,13 +2,18 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "01549046-762e-4845-ac82-995f7544f752"
   },
   "newProjectRoot": "projects",
   "projects": {
     "frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+  "@schematics/angular:component": {
+    "skipTests": true
+  }
+},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -25,8 +30,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
-            ],
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/styles.css"
+],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {

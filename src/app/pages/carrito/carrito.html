@@ -1,0 +1,11 @@
+<h2>Carrito</h2>
+
+<div *ngFor="let p of carrito">
+  {{ p.nombre }} - ${{ p.precio }}
+</div>
+
+<h3>Total: ${{ total }}</h3>
+
+<button class="btn btn-success" (click)="comprar()">
+  Comprar
+</button>

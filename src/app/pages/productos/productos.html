@@ -1,0 +1,18 @@
+<h2>Productos</h2>
+
+<div *ngIf="loading">Cargando...</div>
+<div *ngIf="error">Error cargando productos</div>
+
+<div class="row">
+  <div class="col-md-4 mb-3" *ngFor="let p of productos">
+    <div class="card p-3">
+      <h5>{{ p.nombre }}</h5>
+      <p>{{ p.descripcion }}</p>
+      <p><strong>${{ p.precio }}</strong></p>
+
+      <button class="btn btn-primary" (click)="agregar(p)">
+        Agregar al carrito
+      </button>
+    </div>
+  </div>
+</div>
