@@ -1,38 +1,111 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-carrito',
+
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './carrito.html'
+
+  imports: [
+    CommonModule
+  ],
+
+  templateUrl: './carrito.html',
+
+  styleUrls: ['./carrito.css']
 })
+
 export class CarritoComponent implements OnInit {
 
   carrito: any[] = [];
+
   total = 0;
 
-  constructor(private api: ApiService) {}
+  ngOnInit(): void {
 
-  ngOnInit() {
-    this.carrito = JSON.parse(localStorage.getItem('carrito') || '[]');
-    this.total = this.carrito.reduce((acc, p) => acc + p.precio, 0);
+    if (typeof window !== 'undefined') {
+
+      this.carrito = JSON.parse(
+        localStorage.getItem('carrito') || '[]'
+      );
+
+      this.calcularTotal();
+
+    }
+
   }
 
-  comprar() {
-    const pedido = {
-      productos: this.carrito.map(p => ({
-        productoId: p._id,
-        cantidad: 1
-      })),
-      total: this.total
-    };
+  aumentarCantidad(producto: any) {
 
-    this.api.crearPedido(pedido).subscribe(() => {
-      alert('Pedido realizado');
-      localStorage.removeItem('carrito');
-      this.carrito = [];
-    });
+    producto.cantidad++;
+
+    this.guardarCarrito();
+
   }
+
+  disminuirCantidad(producto: any) {
+
+    if (producto.cantidad > 1) {
+
+      producto.cantidad--;
+
+      this.guardarCarrito();
+
+    }
+
+  }
+
+  eliminarProducto(index: number) {
+
+    this.carrito.splice(index, 1);
+
+    this.guardarCarrito();
+
+  }
+
+  calcularTotal() {
+
+    this.total = this.carrito.reduce(
+
+      (acc, item) =>
+
+        acc + (item.precio * item.cantidad),
+
+      0
+
+    );
+
+  }
+
+  guardarCarrito() {
+
+    localStorage.setItem(
+      'carrito',
+      JSON.stringify(this.carrito)
+    );
+
+    this.calcularTotal();
+
+  }
+  finalizarCompra() {
+
+  let mensaje = '🔮 *Nuevo Pedido* %0A%0A';
+
+  this.carrito.forEach((p: any) => {
+
+    mensaje += `📦 ${p.nombre} x${p.cantidad} - $${p.precio * p.cantidad}%0A`;
+
+  });
+
+  mensaje += `%0A💰 *Total:* $${this.total}`;
+
+  const telefono = '573001112233';
+
+  const url = `https://wa.me/${telefono}?text=${mensaje}`;
+
+  window.open(url, '_blank');
+
+}
+
 }

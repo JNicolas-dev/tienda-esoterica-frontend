@@ -1,1 +1,198 @@
-/* You can add global styles to this file, and also import other style files */
+/* FONDO GLOBAL */
+
+body {
+
+  margin: 0;
+
+  padding: 0;
+
+  min-height: 100vh;
+
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0.75),
+      rgba(0,0,0,0.85)
+    ),
+    url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6');
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-attachment: fixed;
+
+  color: white;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* CONTENEDORES */
+
+.container {
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+/* CARDS */
+
+.card {
+
+  background: rgba(15,15,15,0.9) !important;
+
+  border: 1px solid #ffc107;
+
+  border-radius: 15px;
+
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+  transition: 0.3s;
+
+}
+
+.card:hover {
+
+  transform: scale(1.02);
+
+  box-shadow: 0 0 20px rgba(255,193,7,0.3);
+
+}
+
+/* TEXTOS */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+span {
+
+  color: white;
+
+}
+
+/* BOTONES */
+
+.btn-warning {
+
+  font-weight: bold;
+
+  border-radius: 10px;
+
+}
+
+.btn-outline-light:hover {
+
+  background: #ffc107;
+
+  color: black;
+
+}
+
+/* INPUTS */
+
+.form-control {
+
+  background: rgba(255,255,255,0.08);
+
+  border: 1px solid #ffc107;
+
+  color: white;
+
+}
+
+.form-control:focus {
+
+  background: rgba(255,255,255,0.12);
+
+  color: white;
+
+  border-color: #ffc107;
+
+  box-shadow: 0 0 10px rgba(255,193,7,0.5);
+
+}
+
+/* NAVBAR */
+
+.navbar {
+
+  background: rgba(0,0,0,0.85) !important;
+
+  backdrop-filter: blur(10px);
+
+  border-bottom: 1px solid #ffc107;
+
+}
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  h1 {
+
+    font-size: 2rem;
+
+    text-align: center;
+
+  }
+
+  h2 {
+
+    font-size: 1.5rem;
+
+  }
+
+  .container {
+
+    padding-left: 15px;
+
+    padding-right: 15px;
+
+  }
+
+  .card {
+
+    margin-bottom: 20px;
+
+  }
+
+  .btn {
+
+    width: 100%;
+
+    margin-bottom: 10px;
+
+  }
+
+  .navbar .d-flex {
+
+    flex-direction: column;
+
+    width: 100%;
+
+    margin-top: 15px;
+
+  }
+
+  .navbar .btn {
+
+    width: 100%;
+
+  }
+
+}
+img {
+
+  max-width: 100%;
+
+  height: auto;
+
+}

@@ -1,11 +1,121 @@
-<h2>Carrito</h2>
+<div class="container py-5">
 
-<div *ngFor="let p of carrito">
-  {{ p.nombre }} - ${{ p.precio }}
-</div>
+  <h1 class="text-warning mb-5">
 
-<h3>Total: ${{ total }}</h3>
+    🛒 Carrito Esotérico
 
-<button class="btn btn-success" (click)="comprar()">
-  Comprar
+  </h1>
+
+  <div
+    *ngIf="carrito.length === 0"
+    class="alert alert-dark text-light"
+  >
+
+    No hay productos en el carrito.
+
+  </div>
+
+  <div
+    class="card mb-4 p-3"
+    *ngFor="let p of carrito; let i = index"
+  >
+
+    <div class="row align-items-center text-center text-md-start">
+
+      <div class="col-md-3">
+
+        <img
+          [src]="p.imagen"
+          class="img-fluid rounded"
+        >
+
+      </div>
+
+      <div class="col-md-5">
+
+        <h3 class="text-warning">
+
+          {{ p.nombre }}
+
+        </h3>
+
+        <p>
+
+          {{ p.descripcion }}
+
+        </p>
+
+        <h4 class="text-success">
+
+          $ {{ p.precio }}
+
+        </h4>
+
+      </div>
+
+      <div class="col-md-4 text-center">
+
+        <div class="d-flex justify-content-center gap-2 mb-3">
+
+          <button
+            class="btn btn-danger"
+            (click)="disminuirCantidad(p)"
+          >
+            -
+          </button>
+
+          <span class="btn btn-dark">
+
+            {{ p.cantidad }}
+
+          </span>
+
+          <button
+            class="btn btn-success"
+            (click)="aumentarCantidad(p)"
+          >
+            +
+          </button>
+
+        </div>
+
+        <button
+          class="btn btn-outline-danger"
+          (click)="eliminarProducto(i)"
+        >
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div
+    *ngIf="carrito.length > 0"
+    class="card p-4 text-center"
+  >
+
+    <h2 class="text-warning">
+
+      Total:
+
+    </h2>
+
+    <h1 class="text-success">
+
+      $ {{ total }}
+
+    </h1>
+
+    <button
+  class="btn btn-success mt-3"
+  (click)="finalizarCompra()"
+>
+  📲 Finalizar Compra
 </button>
+
+  </div>
+
+</div>

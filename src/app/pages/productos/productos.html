@@ -1,18 +1,86 @@
-<h2>Productos</h2>
+<div class="container py-5">
 
-<div *ngIf="loading">Cargando...</div>
-<div *ngIf="error">Error cargando productos</div>
+  <div class="text-center mb-5">
 
-<div class="row">
-  <div class="col-md-4 mb-3" *ngFor="let p of productos">
-    <div class="card p-3">
-      <h5>{{ p.nombre }}</h5>
-      <p>{{ p.descripcion }}</p>
-      <p><strong>${{ p.precio }}</strong></p>
+    <h1 class="display-4 fw-bold text-warning">
+      Servicios Espirituales
+    </h1>
 
-      <button class="btn btn-primary" (click)="agregar(p)">
-        Agregar al carrito
-      </button>
-    </div>
+    <p class="text-light">
+      Descubre rituales, limpiezas y protección espiritual.
+    </p>
+
   </div>
+
+  <div *ngIf="loading" class="text-center text-light">
+
+    Cargando productos...
+
+  </div>
+
+  <div *ngIf="error" class="text-center text-danger">
+
+    Error cargando productos
+
+  </div>
+
+  <div class="row">
+
+    <div
+      class="col-12 col-sm-6 col-lg-4"
+      *ngFor="let p of productos"
+    >
+
+      <div class="card bg-dark text-light h-100 shadow">
+
+        <div class="producto-img">
+
+           <img
+            [src]="p.imagen"
+            [alt]="p.nombre"
+          >
+
+        </div>
+
+        <div class="card-body d-flex flex-column">
+
+          <span class="badge bg-warning text-dark mb-3">
+
+            {{ p.categoria }}
+
+          </span>
+
+          <h4 class="text-warning">
+
+            {{ p.nombre }}
+
+          </h4>
+
+          <p class="text-light flex-grow-1">
+
+            {{ p.descripcion }}
+
+          </p>
+
+          <h3 class="text-success mb-4">
+
+            $ {{ p.precio }}
+
+          </h3>
+
+          <button
+            class="btn btn-warning fw-bold"
+            (click)="agregar(p)"
+          >
+            Agregar al carrito
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

@@ -1,35 +1,59 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../../services/api.service';
+
+import { CommonModule } from '@angular/common';
+
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.html'
 })
-export class LoginComponent {
+
+export class Login {
 
   email = '';
   password = '';
-  nombre = '';
 
-  constructor(private api: ApiService) {}
+  mensaje = '';
+
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   login() {
-    this.api.login({ email: this.email, password: this.password })
-      .subscribe((res: any) => {
-        localStorage.setItem('token', res.token);
-        alert('Login exitoso');
-      });
-  }
 
-  register() {
-    this.api.register({
-      nombre: this.nombre,
+    const data = {
+
       email: this.email,
       password: this.password
-    }).subscribe(() => alert('Registrado'));
+
+    };
+
+    this.auth.login(data)
+      .subscribe({
+
+        next: (res) => {
+
+          localStorage.setItem(
+            'usuario',
+            JSON.stringify(res.usuario)
+          );
+
+          this.router.navigate(['/']);
+        },
+
+        error: (err) => {
+
+          this.mensaje = err.error.message;
+        }
+
+      });
   }
 }
