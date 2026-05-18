@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = 'https://helpless-conductor-traps.ngrok-free.dev/api/auth';
 
   constructor(
     private http: HttpClient
@@ -28,7 +28,7 @@ export class AuthService {
   login(data: any): Observable<any> {
 
     return this.http.post(
-      'http://localhost:3000/api/auth/login',
+      `${this.apiUrl}/login`,
       data
     );
 
