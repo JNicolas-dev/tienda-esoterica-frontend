@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class ApiService {
 
-  private apiUrl = 'https://helpless-conductor-traps.ngrok-free.dev/api/productos';
-
+private apiUrl = 'http://localhost:3000/api/productos';
   constructor(
     private http: HttpClient
   ) {}

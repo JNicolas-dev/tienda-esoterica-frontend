@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 export class AuthService {
 
-  private apiUrl = 'https://helpless-conductor-traps.ngrok-free.dev/api/auth';
+  private apiUrl = 'http://localhost:3000/api/auth';
 
   constructor(
     private http: HttpClient
@@ -35,66 +35,43 @@ export class AuthService {
   }
 
   saveUsuario(usuario: any) {
-
-    if (typeof window !== 'undefined') {
-
-      localStorage.setItem(
-        'usuario',
-        JSON.stringify(usuario)
-      );
-
-    }
-
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(
+      'usuario',
+      JSON.stringify(usuario)
+    );
   }
+}
 
   getUsuario() {
-
-    if (typeof window !== 'undefined') {
-
-      return JSON.parse(
-        localStorage.getItem('usuario') || 'null'
-      );
-
-    }
-
+  if (typeof window === 'undefined') {
     return null;
   }
 
-  logout() {
-
-    if (typeof window !== 'undefined') {
-
-      localStorage.removeItem('usuario');
-
-    }
-
-  }
-
-  isLoggedIn(): boolean {
-
-  if (typeof window === 'undefined') {
-
-    return false;
-
-  }
-
-  return !!localStorage.getItem('usuario');
-
-}
-isAdmin(): boolean {
-
-  if (typeof window === 'undefined') {
-
-    return false;
-
-  }
-
-  const usuario = JSON.parse(
-    localStorage.getItem('usuario') || '{}'
+  return JSON.parse(
+    localStorage.getItem('usuario') || 'null'
   );
 
-  return usuario.rol === 'admin';
-
 }
+
+logout() {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('usuario');
+  }
+}
+
+ isLoggedIn(): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  return !!localStorage.getItem('usuario');
+}
+
+  isAdmin(): boolean {
+    const usuario = JSON.parse(
+      localStorage.getItem('usuario') || '{}'
+    );
+    return usuario.rol === 'admin';
+  }
 
 }
